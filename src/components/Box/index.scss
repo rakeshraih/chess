@@ -1,0 +1,31 @@
+.main-container {
+  justify-content: center;
+  display: grid;
+  margin-top: 100px;
+  .fa-exchange-alt {
+    transform: rotate(90deg);
+    margin-bottom: 20px;
+  }
+  table {
+    border-collapse: collapse;
+    &.rotate {
+      transform: rotate(180deg);
+      i {
+        transform: rotate(180deg);
+      }
+    }
+    td {
+      border: 1px solid #ccc;
+      height: 50px;
+      width: 50px;
+      background: orange;
+      &.evenOdd {
+        background: lightcoral;
+      }
+      > div {
+        height: 100%;
+        line-height: 50px;
+      }
+    }
+  }
+}

@@ -29,16 +29,28 @@ class Box extends React.Component {
     this.lastMove = false;
     this.state = {
       board: this.props.board,
-      rotate: false,
+      rotate: true,
+      removeElements: [],
     };
   }
 
   componentDidMount() {}
 
+  updateRemoveElements = element => {
+    const { removeElements } = this.state;
+    if (element && element.name) {
+      this.setState({ removeElements: [...removeElements, element] });
+    }
+  };
   drop = (event, data = {}) => {
+    console.log('drop', data);
+    const arrayString = JSON.stringify(this.state.board);
     if ((this.dragItem.color === 'black' && this.lastMove) || (this.dragItem.color === 'white' && !this.lastMove)) {
-      this.setState({ board: swapPawnPosition(this.dragItem, data, this.state.board) });
-      this.lastMove = !this.lastMove;
+      const board = swapPawnPosition(this.dragItem, data, this.state.board, this.updateRemoveElements);
+      this.setState({ board });
+      if (arrayString !== JSON.stringify(board)) {
+        this.lastMove = !this.lastMove;
+      }
     }
   };
   drag = (event, data) => {
@@ -52,21 +64,28 @@ class Box extends React.Component {
   };
 
   render() {
+    const { rotate, removeElements } = this.state;
     return (
       <div className="main-container">
         <h2>{!this.lastMove ? 'White' : 'Black'} to move</h2>
         <i
           role="button"
           onClick={() => {
-            this.setState({ rotate: !this.state.rotate });
+            this.setState({ rotate: !rotate });
           }}
           className="fas fa-exchange-alt"
         ></i>
-        <table className={this.state.rotate ? 'rotate' : ''}>
+        <div className="removed-container white">
+          {removeElements.map(val => (val.color === 'white' ? <i className={`fas ${val.className}`}></i> : ''))}
+        </div>
+        <table className={`${!this.lastMove ? 'white' : 'black'} ${this.state.rotate ? 'rotate' : ''}`}>
           <tbody>
             {drawRowElement(this.props.board, { drop: this.drop, allowDrop: this.allowDrop, drag: this.drag })}
           </tbody>
         </table>
+        <div className="removed-container black">
+          {removeElements.map(val => (val.color === 'black' ? <i className={`fas ${val.className}`}></i> : ''))}
+        </div>
       </div>
     );
   }

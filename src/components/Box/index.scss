@@ -3,15 +3,25 @@
   display: grid;
   margin-top: 100px;
   .fa-exchange-alt {
-    transform: rotate(90deg);
+    // transform: rotate(90deg);
     margin-bottom: 20px;
   }
   table {
     border-collapse: collapse;
     &.rotate {
-      transform: rotate(180deg);
+      // transform: rotate(180deg);
       i {
-        transform: rotate(180deg);
+        // transform: rotate(180deg);
+      }
+    }
+    &.black {
+      tr:last-child td {
+        animation: blinking 1s infinite;
+      }
+    }
+    &.white {
+      tr:first-child td {
+        animation: blinking 1s infinite;
       }
     }
     td {
@@ -27,5 +37,28 @@
         line-height: 50px;
       }
     }
+  }
+
+  .removed-container {
+    padding: 20px 0px;
+    justify-content: flex-start;
+    display: flex;
+    i {
+      padding: 0 5px;
+    }
+    &.white {
+      i {
+        color: #ccc;
+      }
+    }
+  }
+}
+
+@keyframes blinking {
+  0% {
+    border: 2px solid #ccc;
+  }
+  100% {
+    border: 2px solid #111e6c;
   }
 }

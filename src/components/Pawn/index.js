@@ -8,6 +8,7 @@ function Element(props) {
   return (
     <div onDrop={event => drop(event, item)} onDragOver={event => allowDrop(event, item)}>
       {className ? <i draggable onDragStart={event => drag(event, item)} className={`fas ${className}`}></i> : ''}
+      <span>{item.position}</span>
     </div>
   );
 }

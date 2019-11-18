@@ -48,11 +48,13 @@ const addKing = board => {
   let pawnNew = { ...King };
   pawnNew.className = `${pawnNew.className} white`;
   pawnNew.initial = [0, 4];
+  pawnNew.color = 'white';
   board[0][4] = pawnNew;
 
   pawnNew = { ...King };
   pawnNew.className = `${pawnNew.className} black`;
   pawnNew.initial = [7, 4];
+  pawnNew.color = 'black';
   board[7][4] = pawnNew;
   return board;
 };
@@ -61,16 +63,18 @@ const addQueen = board => {
   let pawnNew = { ...Queen };
   pawnNew.className = `${pawnNew.className} white`;
   pawnNew.initial = [0, 3];
+  pawnNew.color = 'white';
   board[0][3] = pawnNew;
 
   pawnNew = { ...Queen };
   pawnNew.className = `${pawnNew.className} black`;
   pawnNew.initial = [7, 3];
+  pawnNew.color = 'black';
   board[7][3] = pawnNew;
   return board;
 };
 
-const allPower = [Rook, Bishop, Knight];
+const allPower = [Rook, Knight, Bishop];
 
 const addAllPower = board => {
   let [i, loop, color] = [0, 1, 'white'];

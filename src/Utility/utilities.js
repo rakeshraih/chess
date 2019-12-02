@@ -167,7 +167,8 @@ const swapPawnPosition = (dragItem, data, board, updateRemoveElements) => {
 };
 
 const swap = (board, boardItem, i, j, m, n) => {
-  if (boardItem.color(board[i][j] ? board[i][j].color : null)) {
+  // if (boardItem.color(board[i][j] ? board[i][j].color : null)) {
+  if (boardItem.color) {
     updateRemoveElementsFn(board[i][j]);
     board[i][j] = boardItem;
     board[m][n] = null;
